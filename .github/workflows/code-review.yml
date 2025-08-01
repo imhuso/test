@@ -1,0 +1,20 @@
+name: AI Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: AI Code Review
+        uses: imhuso/Bugment@main
+        with:
+          augment_access_token: ${{ secrets.AUGMENT_ACCESS_TOKEN }}
+          augment_tenant_url: ${{ secrets.AUGMENT_TENANT_URL }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
