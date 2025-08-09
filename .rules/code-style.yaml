@@ -1,0 +1,61 @@
+rules:
+  general:
+    - name: "必须使用分号"
+      description: "每个语句结尾必须使用分号"
+      severity: error
+      pattern: "(?<!;)\\s*$"
+      fileTypes: [".js", ".ts"]
+    
+    - name: "禁止使用 var"
+      description: "必须使用 const 或 let 代替 var"
+      severity: error
+      pattern: "\\bvar\\s+"
+      fileTypes: [".js", ".ts"]
+    
+    - name: "严格相等比较"
+      description: "必须使用 === 和 !== 而不是 == 和 !="
+      severity: error
+      patterns:
+        - "\\s==\\s"
+        - "\\s!=\\s"
+      fileTypes: [".js", ".ts"]
+    
+    - name: "赋值与比较混淆"
+      description: "条件语句中不能使用单个等号"
+      severity: error
+      pattern: "if\\s*\\([^)]*=[^=][^)]*\\)"
+      fileTypes: [".js", ".ts"]
+  
+  functions:
+    - name: "除法必须检查除数"
+      description: "除法操作前必须检查除数是否为0"
+      severity: error
+      pattern: "\\breturn\\s+\\w+\\s*/\\s*\\w+"
+      fileTypes: [".js", ".ts"]
+    
+    - name: "数组越界检查"
+      description: "数组访问必须检查边界"
+      severity: warning
+      pattern: "for\\s*\\([^;]+;[^;]*<=\\s*\\w+\\.length"
+      fileTypes: [".js", ".ts"]
+  
+  variables:
+    - name: "未初始化变量"
+      description: "声明变量时必须初始化"
+      severity: warning
+      pattern: "let\\s+\\w+;|const\\s+\\w+;"
+      fileTypes: [".js", ".ts"]
+  
+  recursion:
+    - name: "递归深度限制"
+      description: "递归函数必须有最大深度限制"
+      severity: warning
+      pattern: "factorial|fibonacci"
+      fileTypes: [".js", ".ts"]
+  
+  null_checks:
+    - name: "空值检查规范"
+      description: "必须使用严格的空值检查"
+      severity: error
+      pattern: "\\w+\\s*==\\s*(null|undefined)"
+      fileTypes: [".js", ".ts"]

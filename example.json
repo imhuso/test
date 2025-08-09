@@ -1,0 +1,18 @@
+
+🚀 Welcome to Auggie CLI Agent by Augment Code!
+
+To get started, please authenticate with Augment:
+
+  auggie --login
+
+This will authenticate you and start an interactive session where you can:
+  • Edit files and write code
+  • Execute tests and other commands
+  • Create and review pull requests
+  • Integrate with GitHub and other systems
+  • Get help with development tasks
+
+For automation, you can use environment variables or token files:
+  • AUGMENT_SESSION_AUTH - OAuth session data (same format as ~/.augment/session.json)
+  • --augment-token-file - Path to file containing authentication token
+

@@ -1,0 +1,95 @@
+{
+  "securityRules": {
+    "inputValidation": {
+      "description": "所有输入必须进行验证",
+      "rules": [
+        {
+          "id": "DIV_BY_ZERO",
+          "description": "除法操作必须检查除数不为零",
+          "severity": "critical",
+          "pattern": "function.*divide.*{[^}]*return.*\\/.*(?!if)",
+          "message": "除法操作缺少除数为零的检查"
+        }
+      ]
+    },
+    "arrayBounds": {
+      "description": "数组访问必须检查边界",
+      "rules": [
+        {
+          "id": "ARRAY_OUT_OF_BOUNDS",
+          "description": "循环不能超出数组边界",
+          "severity": "high",
+          "pattern": "i\\s*<=\\s*\\w+\\.length",
+          "message": "数组访问可能越界，应该使用 < 而不是 <="
+        }
+      ]
+    },
+    "typeCoercion": {
+      "description": "避免类型强制转换问题",
+      "rules": [
+        {
+          "id": "LOOSE_EQUALITY",
+          "description": "必须使用严格相等",
+          "severity": "medium",
+          "patterns": ["==(?!=)", "!=(?!=)"],
+          "message": "使用 === 或 !== 代替宽松比较"
+        },
+        {
+          "id": "ASSIGNMENT_IN_CONDITION",
+          "description": "条件中的赋值操作",
+          "severity": "critical",
+          "pattern": "if\\s*\\([^=)]*=(?!=)[^=)]*\\)",
+          "message": "条件语句中使用了赋值操作符而非比较操作符"
+        }
+      ]
+    },
+    "variableScope": {
+      "description": "变量作用域规范",
+      "rules": [
+        {
+          "id": "NO_VAR",
+          "description": "禁止使用 var 声明",
+          "severity": "high",
+          "pattern": "\\bvar\\s+",
+          "message": "使用 let 或 const 代替 var"
+        }
+      ]
+    },
+    "recursion": {
+      "description": "递归函数安全",
+      "rules": [
+        {
+          "id": "UNBOUNDED_RECURSION",
+          "description": "递归必须有明确的终止条件",
+          "severity": "high",
+          "pattern": "factorial\\(n\\s*-\\s*1\\)(?!.*n\\s*<)",
+          "message": "递归函数缺少负数保护"
+        }
+      ]
+    },
+    "nullSafety": {
+      "description": "空值安全检查",
+      "rules": [
+        {
+          "id": "NULL_CHECK",
+          "description": "必须正确检查空值",
+          "severity": "medium",
+          "pattern": "==\\s*(null|undefined)",
+          "message": "使用严格相等检查空值"
+        }
+      ]
+    },
+    "syntaxErrors": {
+      "description": "语法规范",
+      "rules": [
+        {
+          "id": "MISSING_SEMICOLON",
+          "description": "语句必须以分号结尾",
+          "severity": "low",
+          "pattern": "^(?!.*[;{}]).*[^\\s]$",
+          "message": "语句缺少分号"
+        }
+      ]
+    }
+  }
+}
